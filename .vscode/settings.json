@@ -3,5 +3,8 @@
     "source.fixAll.eslint": true,
     "eslint.autoFixOnSave": true
   },
-  "files.eol": "\n" 
+  "files.eol": "\n",
+  "commentTranslate.source": "DarkCWK.youdao-youdao",
+  "javascript.validate.enable": false,
+  "typescript.validate.enable": false
 }
