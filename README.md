@@ -1,229 +1,183 @@
 # vue-webtopo-svgeditor
 
-> 基于 vue3.2+ts 实现的 svg 可视化 web 组态编辑器。可直接把 svg 文件和 vue 组件作为编辑器图形库使用，赋予其缩放和旋转等功能，并支持自定义拓展参数，实时控制组件状态等
+> 基于vue3实现的svg可视化web组态编辑器。可无需修改代码动态添加组件
 
-预览地址：[http://svg.yaolm.top/](http://svg.yaolm.top/)
+当前分支版本为2.1
 
-`qq`交流群：`209048413`,仅供交流，有问题请提[issue](https://github.com/yaolunmao/vue-webtopo-svgeditor/issues)，以便帮助更多有相同问题的人
 
-历史版本请在本项目其它分支进行查看
+## [图片挂了点此](https://www.cnblogs.com/Hero-/p/14784744.html)
 
-## 项目优点
 
-### 组态软件核心功能都具备
+## 如何使用
 
-没有特殊需求，只需要配置好图形库，即可开始您的组态世界
+```
+# 克隆项目
+git clone https://github.com/yaolunmao/vue-webtopo-svgeditor.git
 
-### 优越的性能
+# 进入项目目录
+cd vue-webtopo-svgeditor
 
-使用了`svg`的`symbol`技术，`use`方式加载`svg`图形，同样的 svg 图形不管数量多少，只会渲染一次
+# 安装依赖
+yarn install
 
-### 学习成本极低
+# 启动服务
+yarn serve
 
-`svg`文件即组件，引入之后无需进行额外配置，编辑器会自适应解析加载组件，添加自定义组件和传统`html`无差，前端 er 零学习成本上手
-
-### 易拓展
-
-配置文件采用开放式结构，属性支持自定义拓展。图形库支持添加`svg`文件或者`vue`组件，定制开发将变得容易
-
-### 易于集成
-
-项目已经编写好了库模式脚本，组件已经发布到[npm](https://www.npmjs.com/package/webtopo-svg-edit)，支持外部传入自定义组件，支持组件事件订阅等
-
-### 免费开源
-
-MIT 开源协议 可商用（自带的`svg`文件除外）
-
-## 图形库说明
-
-### 无状态组件
-
-无状态组件就是`svg`文件，编辑器已经将节点的拖动，缩放，旋转等功能封装好了，您无需做出额外配置即可使用，若是需要动态的去设置`svg`的颜色边框之类的，需要自行设置`props`，参考`src\config-center\svg-file\stateless`的配置，可以设置的属性为`svg`的公共属性，例如`fill`、`stroke `、`stroke-dasharray`这些，具体属性请参考[MDN-SVG 属性](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute#svg_%E5%B1%9E%E6%80%A7%EF%BC%88%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%86%E7%B1%BB%EF%BC%89)
-
-### 有状态组件
-
-有状态组件也是 svg 文件，区别就在于无状态组件控制节点属性的配置配置在`props`上，而有状态组件的配置需要配置到`state`上，有状态组件对比无状态组件的好处是可以改变一个状态去影响多个属性，例如这里的断路器开关，其实是同时改变了颜色和把手的透明度,参考配置：`src\config-center\svg-file\stateful\circuit-breaker\index.ts`
-
-![](./readme-imgs/有状态组件.gif)
-
-### 自带动画组件
-
-没什么好说的了，支持直接使用自带动画的`svg`文件，参考`src\config-center\svg-file\have-animation`
-
-### 自定义 svg
-
-本质上就是`vue`的`template`代码片段，它可以完全替代无状态组件和有状态组件，并且可以根据自定义代码实现更多节点和属性的控制，缺点就是需要写代码--！参考`src\config-center\svg-file\custom-svg`
-
-### vue 组件
-
-其实和自定义`svg`相似，都是`vue`的`template`代码片段，但是`svg`标签里面无法渲染`html`的代码，所以在最外层用了`foreignObject`进行了包裹，同样支持缩放旋转等操作。参考`src\config-center\vue`
-
-## 如何添加图形库
-
-1. 将下载好的svg文件放到`src\assets\svgs`目录下
-2. 修改下载好的svg文件代码片段，删除想动态修改的属性。例如你想动态修改svg的填充颜色，要删掉代码片段的`fill`属性
-3. 添加配置文件，文件目录为`src\config-center`
-
-需要注意配置文件的`name`属性要和`svg`文件名保持一致，如果是自定义组件需要按需导入一下，参考`src\config-center\index.ts`，这么做的目的是当你把编辑器构建成插件引入到其它项目的时候，其它项目使用编辑器无需注册你的自定义组件
-
-## 操作说明
-
-### 绘画
-
-选中左侧的组件库，按住鼠标左键即可把组件拖动到画布中
-
-![](./readme-imgs/绘画.gif)
+```
 
 ## 操作
 
-选中绘制好的节点后会出现锚点，可以直接进行移动、缩放、旋转等功能，右侧属性面板可以设置配置好的节点的属性，鼠标右键可以进行一些快捷操作
+点击载入模板  进入预览页点击模拟硬件 等待两秒钟即可看到动态效果
 
-![](./readme-imgs/操作.gif)
+- 鼠标左键选中组件 按住可拖动至画布
+- 鼠标双击画布取消选中组件
+- 右侧工具栏调整选中组件样式
+- 键盘↑↓←→可移动选中组件
+- ctrl+c复制当前选中组件
+- deleted删除当前选中组件
+- 鼠标滚轮放大缩小选中组件
 
-### 连线
+## 特别说明
 
-鼠标移动到组件上时会出现连线锚点，左键点击锚点创建线段，继续左键点击画布会连续创建线段，右键停止创建线段，鼠标放在线段上会出现线段端点提示，拖动即可重新设置连线，选中线段后还可以在右侧的动画面板设置线段的动画效果
+vue2想使用动态组件请使用`Vue.component()`
 
-![](./readme-imgs/连线.gif)
+> vue2使用感谢大佬[chj2020](https://github.com/chj2020)指导
 
-## 其他说明
+举例 src\components\SvgComponents.vue
 
-- 若是组件中心点不是鼠标指针点，请自行在页面设置里匹配`x`轴和`y`轴数据
-- 组件隐藏后，可以在顶部工具栏的组件树里面选中隐藏的组件，进而设置隐藏组件的属性
-- 本项目示例`svg`文件规格以标准图标大小`1024x1024px`，如果您的组件效果不好，请使用该规格
-
-## 集成到已有项目
-
-### 脚手架项目
-
-```
-# 创建项目(已有项目跳过此步骤)
-npm init vite@latest
-
-# 进入项目目录
-cd projectname
-
-# 安装插件
-pnpm i webtopo-svg-edit
-
-# 安装pinia
-pnpm i pinia
-
-# 修改main.ts 注册pinia
-import { createPinia } from 'pinia';
-const app = createApp(App);
-app.use(createPinia());
-app.mount('#app')
-
-#在需要的页面引入插件
-import { WebtopoSvgEdit,WebtopoSvgPreview } from 'webtopo-svg-edit';
-import 'webtopo-svg-edit/dist/style.css'
-```
-### umd方式集成
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>webtopo-svg-edit Example</title>
-    <link href="https://unpkg.com/webtopo-svg-edit@0.0.8/dist/style.css" rel="stylesheet" />
-    <script src="https://unpkg.com/vue@3.2.6/dist/vue.global.prod.js"></script>
-    <script src="https://unpkg.com/vue-demi@0.13.11/lib/index.iife.js"></script>
-    <script src="https://unpkg.com/pinia@2.0.33/dist/pinia.iife.prod.js"></script>
-    <script src="https://unpkg.com/webtopo-svg-edit@0.0.8/dist/webtopo-svg-edit.umd.js"></script>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script>
-      const pinia = Pinia.createPinia()
-      const app = Vue.createApp(WebtopoYLM.WebtopoSvgEdit)
-      app.use(pinia)
-      app.mount('#app')
-    </script>
-  </body>
-</html>
-
-```
-### es module方式集成
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>webtopo-svg-edit Example</title>
-    <link href="https://unpkg.com/webtopo-svg-edit@0.0.8/dist/style.css" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
-</html>
-<script type="importmap">
-  {
-    "imports": {
-      "vue": "https://unpkg.com/vue@3.2.47/dist/vue.esm-browser.prod.js",
-      "@vue/devtools-api": "https://cdn.jsdelivr.net/npm/@vue/devtools-api/lib/esm/index.min.js",
-      "vue-demi": "https://unpkg.com/vue-demi@0.13.11/lib/index.mjs",
-      "pinia": "https://unpkg.com/pinia@2.0.29/dist/pinia.esm-browser.js",
-      "WebtopoYLM": "https://unpkg.com/webtopo-svg-edit@0.0.8/dist/webtopo-svg-edit.es.js"
+```vue
+<template>
+  <component :is="component_prop"
+             :prop_data=component_prop></component>
+</template>
+<script>
+import Vue from 'vue'
+export default {
+  props: ['svgInfoData', 'component_prop'],
+  data () {
+    return {
+      componentTag: ''
     }
+  },
+  created () {
+    this.svgInfoData.forEach(f => {
+      let componentInfo = {
+        template: f.template,
+        props: f.props
+      }
+      Vue.component(f.type, componentInfo)
+    })
   }
+}
 </script>
-<script type="module">
-  import { createApp } from 'vue'
-  import { createPinia } from 'pinia'
-  import { WebtopoSvgEdit } from 'WebtopoYLM'
-  const app = createApp(WebtopoSvgEdit)
-  app.use(createPinia())
-  app.mount('#app')
-</script>
+<style scoped>
+</style>
 
 ```
-如果集成有问题请参考示例项目[demo](/demo)
 
-**请注意：插件方式引入会导致左侧工具栏的 icon 图标无法正确显示，请自行寻找您项目构建工具的 svg 加载器，将 icon 图标转换成 symbol，并将名字命名为‘svg-xxx’即可正常显示**
+### vue2如何支持多节点
 
-## 贡献代码
+首先安装vue-fragment
 
-1. `Fork` 本项目
-2. 新建`Feat_xxx`分支
-3. 提交代码
-4. 新建 `Pull Request`
+```vue
+npm install vue-fragment
+```
 
-**只接受 github 的 pr，gitee 为 github 镜像库**
+引用vue-fragment
 
-## 声明
+```vue
+//main.js
+import Fragment from 'vue-fragment'
+Vue.use(Fragment.Plugin)
+```
 
-**本项目组件库来源均为网络，仅供学习交流使用，请勿将本项目里面的组件用于商业用途**
+然后在json文件的template属性值里面最外层使用标签
 
-## 君子协议
+```vue
+<fragment></fragment>
+```
 
-开源版使用时请保留底部的版权声明，感谢支持
+例如
 
-![](./readme-imgs/版权声明.png)
+```vue
+<fragment><path :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\" transform=\"translate(-145,-180)\"></path></fragment>
+```
 
-## 常见问题
 
-### vue2怎么集成，有vue2的版本吗？
 
-vue2建议使用iframe、cdn集成，目前没有vue2的版本，如果您接受不了vue2方式集成，也可参考2.1分支进行改造。
-### 项目启动不起来怎么办？
-请使用`pnpm`安装依赖
-### 随便改哪里的代码eslint都报错怎么办？
-vscode安装eslint插件
-## 鸣谢
+### 注意
 
-吉林省格尺科技有限公司促进该项目诞生
+当前为了演示可动态添加组件，注册组件写在了通用组件的created生命周期，获取组件定义json的时候写在了Edit和Preview页面，此写法有一个弊端就是每次拖拽组件都会访问SvgComponents.vue的created生命周期进行组件注册，此步可以移到main.js里面使用app.component()进行组件全局注册，传递组件是通过is控制显示组件，提升运行效率
 
-[秀英童鞋](https://blog.csdn.net/qq_42862247)对此项目前进的耐心指导
+## todo
 
-[一个低代码（可视化拖拽）教学项目](https://github.com/woai3c/visual-drag-demo)
+- vuecli移除改为使用vite构建
+- options写法改为composition写法
+- 画板标尺功能
 
-还在坚持用原生`svg`进行组态的开发者们
+## 动态添加组件
 
-## 捐助
+可使用任意生成svg代码的工具，我这里使用在线编译器进行模拟
 
-如果这个项目对您有所帮助，请扫下方二维码打赏一杯咖啡。
+点击[这里](http://svgedit.yaolm.top/)进行svg图像绘制，我这里以心形为例
 
-![](./readme-imgs/捐赠.jpg)
+![绘制心形图片](https://images.cnblogs.com/cnblogs_com/Hero-/1976969/o_2105190646421.png)
 
-## 感谢以下小伙伴为此项目做出的贡献
+将svg代码复制下来，双引号进行转义，删除无用属性（比如id），你也可以直接使用我下面的代码
 
-<a href="https://github.com/yaolunmao/vue-webtopo-svgeditor/graphs/contributors"><img src="https://contrib.rocks/image?repo=yaolunmao/vue-webtopo-svgeditor" /></a>
+```
+<path fill=\"#FF0000\" stroke=\"#000000\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\"></path>
+```
+
+将拓展字段进行双向绑定 我目前只做了颜色
+
+```
+<path :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\" transform=\"translate(-145,-180)\"></path>
+```
+
+修改项目文件夹pubilc下的模拟接口返回的json，新增一项：
+
+```
+{
+	"type": "TestAddSvg",
+	"title": "测试新增组件",
+	"panel_class": "draggable",
+	"template": "<path :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\" transform=\"translate(-145,-180)\"></path>",
+	"props": ["prop_data"],
+	"default_attr": {
+		"color": "#FF0000"
+	},
+	"create_type": "draggable",
+	"priview_img": "https://svg.yaolunmao.top/test.png"
+}
+```
+
+![修改json](https://images.cnblogs.com/cnblogs_com/Hero-/1976969/o_210519050539%E6%B7%BB%E5%8A%A0%E7%BB%84%E4%BB%B62.png)
+
+启动项目，就可以看到刚才添加的组件了
+
+![预览界面](https://images.cnblogs.com/cnblogs_com/Hero-/1976969/o_210519050543%E6%B7%BB%E5%8A%A0%E7%BB%84%E4%BB%B63.png)
+
+也支持直接引入图片，只不过放大有失真，将下面的代码替换上面json文件的template值
+
+```
+<image x=\"-33\" y=\"-33\" width=\"66\" height=\"66\" xlink:href=\"https://svg.yaolunmao.top/test.png\" />
+```
+
+ps：目前中心辅助线的坐标取决于svg组件的中心坐标，请自行添加transform属性调整svg组件中心坐标
+
+## 截图
+
+
+
+## ![绘制组件](https://blog-static.cnblogs.com/files/Hero-/%E7%BB%98%E5%88%B6%E7%BB%84%E4%BB%B6.gif)
+
+![绘制图表](https://blog-static.cnblogs.com/files/Hero-/%E5%9B%BE%E8%A1%A8.gif)
+
+![编辑器页面](https://img-blog.csdnimg.cn/20210322100014954.gif#pic_center)
+
+![预览界面](https://blog-static.cnblogs.com/files/Hero-/%E9%A2%84%E8%A7%88.gif)
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
