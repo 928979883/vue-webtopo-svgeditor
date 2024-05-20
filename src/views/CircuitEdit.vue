@@ -539,7 +539,7 @@ export default {
 
     }
     //请求接口获取组件
-    this.$axios.get('/InterfaceReturn.json')
+    this.$axios.get('/LeftToolBar.json')
       .then(function (response) {
         _this.svgInfoData = response.data;
         // console.log(response.data);

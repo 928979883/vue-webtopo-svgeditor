@@ -3,7 +3,7 @@
   <div class="components-layout-left leftNav">
 
     <!-- <a-input-search placeholder="搜索组件" /> -->
-    <a-collapse v-model:activeKey="activeKey"
+    <a-collapse :activeKey="activeKey"
                 accordion>
       <a-collapse-panel key="1"
                         header="拖动组件">
